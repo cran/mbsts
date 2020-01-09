@@ -1,0 +1,10 @@
+805673ea50293b7743bb013b8ad8017c *DESCRIPTION
+13993aa2941faed5b6257361167580ce *NAMESPACE
+182d79f7c557335c176aeb1823c56392 *R/mbsts.R
+dfaa063c1b448aeac2baa1a4cd237f8c *R/mbsts.forecast.R
+89d30fe76d32ba97665569e770aab3c7 *R/tsc.setting.R
+7c23cda081f418772dc5399339f5204c *data/exdata.rda
+5237270203898eabf5708e1a9b2f0810 *man/exdata.Rd
+08d88d2d8048ae1770448ec30e20e0ee *man/mbsts.Rd
+d3cf9d1daf82340efddcb2c5f89859b4 *man/mbsts.forecast.Rd
+1bd92d8ab2b629ebb2ddd9a0915298e6 *man/tsc.setting.Rd

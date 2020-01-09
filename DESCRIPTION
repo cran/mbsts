@@ -1,0 +1,14 @@
+Package: mbsts
+Type: Package
+Title: Multivariate Bayesian Structural Time Series
+Version: 1.0
+Author: Jinwen Qiu <qjwsnow_ctw@hotmail.com>
+Maintainer: Jinwen Qiu <qjwsnow_ctw@hotmail.com>
+Description: Multivariate time series regression using dynamic linear models fit by MCMC. See Qiu, Jammalamadaka and Ning (2018) <http://www.jmlr.org/papers/volume19/18-009/18-009.pdf>.
+License: LGPL-2.1
+NeedsCompilation: no
+Depends: pscl, MASS, KFAS, MCMCpack, Matrix, R(>= 3.5)
+Repository: CRAN
+Date: 2020-01-07
+Packaged: 2020-01-08 03:05:45 UTC; william
+Date/Publication: 2020-01-09 18:10:05 UTC
