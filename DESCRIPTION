@@ -1,14 +1,21 @@
 Package: mbsts
 Type: Package
 Title: Multivariate Bayesian Structural Time Series
-Version: 1.0
-Author: Jinwen Qiu <qjwsnow_ctw@hotmail.com>
+Version: 2.2
+Author: Jinwen Qiu <qjwsnow_ctw@hotmail.com>, Ning Ning <patricianing@gmail.com>
 Maintainer: Jinwen Qiu <qjwsnow_ctw@hotmail.com>
-Description: Multivariate time series regression using dynamic linear models fit by MCMC. See Qiu, Jammalamadaka and Ning (2018) <http://www.jmlr.org/papers/volume19/18-009/18-009.pdf>.
+Description: Tools for data analysis with multivariate Bayesian structural time series (MBSTS) models.  Specifically, the package provides facilities for implementing general structural time series models, flexibly adding on different time series components (trend, season, cycle, and regression), simulating them, fitting them to multivariate correlated time series data, conducting feature selection on the regression component.
 License: LGPL-2.1
+Encoding: UTF-8
 NeedsCompilation: no
-Depends: pscl, MASS, KFAS, MCMCpack, Matrix, R(>= 3.5)
+Depends: R(>= 3.5.0)
+Imports: KFAS, Matrix, pscl, MCMCpack, MASS, ggplot2, reshape2, BBmisc,
+        matrixStats, methods
 Repository: CRAN
-Date: 2020-01-07
-Packaged: 2020-01-08 03:05:45 UTC; william
-Date/Publication: 2020-01-09 18:10:05 UTC
+RoxygenNote: 7.1.1
+LazyData: true
+Collate: 'mbsts.forecast.R' 'mbsts_class.R' 'mbsts_function.R'
+        'package.R' 'para.est.R' 'plot_comp.R' 'plot_prob.R'
+        'simdata.R' 'tsc.setting.R'
+Packaged: 2021-06-25 15:46:03 UTC; patricia
+Date/Publication: 2021-06-25 22:50:07 UTC
