@@ -18,8 +18,9 @@ mbsts.forecast(object, STmodel, newdata, steps = 1)
 \value{
 An object of predicted values which is a list containing the following:
 \item{pred.dist}{An array of draws from the posterior predictive distribution. The first dimension in the array represents time, the second dimension denotes each target series, and the third dimension indicates each MCMC draw.}
-\item{pred.mean}{A matrix giving the posterior mean of the prediction for each target series.
-}
+\item{pred.mean}{A matrix giving the posterior mean of the prediction for each target series.}
+\item{pred.sd}{A matrix giving the posterior standard deviation of the prediction for each target series.}
+\item{pred.se}{A matrix giving the posterior standard error of the prediction for each target series, calculated by pred.sd divided by the square root of the numer of MCMC iterations.}
 }
 \description{
 Generate draws from the posterior predictive distribution of a mbsts object. Samples from the posterior predictive distribution of the MBSTS model.

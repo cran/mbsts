@@ -12,19 +12,6 @@
 #' @param S A vector of integer values representing the number of seasons to be modeled for each target series. The value \eqn{0} in the \eqn{j}-th entry indicates that the \eqn{j}-th target series does not include the seasonal component. 
 #' @param vrho A vector of numerical values taking values in \eqn{[0,1]}, describing a damping factor for each target series. The value \eqn{0} in the \eqn{j}-th entry indicates that the \eqn{j}-th target series does not include the cycle component. 
 #' @param lambda A vector of numerical values, whose entries equal to \eqn{2\pi/q} with \eqn{q} being a period such that \eqn{0<\lambda<\pi}, describing the frequency.
-#' @examples
-#' #Two target series
-#' Y<-as.matrix(simdata[,1:2])
-#' 
-#' #split dataset into training set and test set
-#' n=dim(Y)[1]
-#' ntrain=n-5
-#' Ytrain<-Y[1:ntrain,]
-#'  
-#' #Specify time series components
-#' STmodel<-tsc.setting(Ytrain,mu=c(1,1),rho=c(0.6,0.8),S=c(12,0),vrho=c(0,0.99),
-#'                                                             lambda=c(0,pi/50))
-
 #' @return An object of the SSModel class.
 
 #'@references

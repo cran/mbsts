@@ -15,7 +15,7 @@
 #' @param cyc A logical vector indicating whether there is a cycle component for each target series, such as c(F,T).
 #' @param time Null or a data frame for time index of the time series. The default value is data.frame(seq(1,n)).
 #' @param title NULL or a character vector whose entries are titles for the plots of target series' posterior state components, such as c("Posterior State Components of y1", "Posterior State Components of y2"). The default is c("y1","y2",...).
-#' 
+#' @param component_selection A character variable whose value must be one of "All", "Trend", "Seasonal", "Cycle", and "Regression". Here, "Trend" means the trend component only and "All" means all the components.
 
 #'@references
 #'\Qiu2018
@@ -29,7 +29,7 @@
 setGeneric(
   "plot_comp",
   function (object,slope,local,season,cyc,time=NULL, 
-            title=NULL)
+            title=NULL,component_selection="All")
     standardGeneric("plot_comp")
 )
 
@@ -40,13 +40,13 @@ setMethod(
   definition=function (
     object,
     slope,local,season,cyc,time=NULL, 
-    title=NULL
+    title=NULL,component_selection="All"
     ) {
     tryCatch(
       plot_comp.internal(
         object,
         slope=slope,local=local,season=season,cyc=cyc,
-        time=time,title=title
+        time=time,title=title,component_selection=component_selection
       )
     )
   }
@@ -57,7 +57,8 @@ setMethod(
 plot_comp.internal <-
   function(object,
            slope,local,season,cyc,time=NULL, 
-           title=NULL){ 
+           title=NULL,component_selection="All"){ 
+    
     X=object@Xtrain
     states=object@States
     Bhat=object@B.hat
@@ -65,6 +66,8 @@ plot_comp.internal <-
     m=object@mtrain
     
     allplots <- vector('list',m)
+    indplots <- vector('list',m)
+    
     if (is.null(title)){
       for (i in 1:m){
         title=c(title,paste0('y',toString(i)))
@@ -83,13 +86,9 @@ plot_comp.internal <-
     
     pos=1
     
-    
     for (i in 1:m){
-      
-      if(is.null(time)){
-        time<-data.frame(seq(1,n))
-      }
-      plot.data<-time
+      #i=2
+      plot.data<-data.frame(seq(1,n))
       
       if(slope[i]==T){
         trend<- data.frame(state.ave[,pos])
@@ -136,44 +135,68 @@ plot_comp.internal <-
       
       cname=c("time")
       if(!is.null(trend)){
-        cname<-c(cname,"trend")
+        cname<-c(cname,"Trend")
       }
       
       if(!is.null(seasonal)){
-        cname<-c(cname,"seasonal")
+        cname<-c(cname,"Seasonal")
       }
       
       if(!is.null(cycle)){
-        cname<-c(cname,"cycle")
+        cname<-c(cname,"Cycle")
       }
       
       if(!is.null(reg)){
-        cname<-c(cname,"regression")
+        cname<-c(cname,"Regression")
       }
-      
       
       colnames(plot.data)<-cname
       row.names(plot.data)<-as.character(seq(1,n))
-      plot.data<-melt(plot.data,id=c("time"))
-      value<-plot.data[,3]
-      variable<-plot.data[,2]
+      plot.data2<-melt(plot.data,id=c("time"))
       
-      allplots[[i]]<-ggplot(plot.data, aes(x = time,y=value,colour=variable)) + 
+      if (component_selection=="All") {
+        value<-plot.data2[,3]
+        variable<-plot.data2[,2]
+        allplots[[i]]<-ggplot(plot.data2, aes(x = time,y=value,colour=variable)) +
           geom_line(aes(colour=variable)) +
-          scale_colour_discrete(guide = FALSE) +
+          scale_colour_discrete(guide = "none") +
           facet_wrap(~variable,ncol= 1)+
           labs(title=title[i], x="Time",
                y="State Components", color=NULL)+
           theme(text = element_text(size=13),
                 axis.text = element_text(size=14),
-                plot.title = element_text(hjust = 0.4,size=16))
-        
-
+                plot.title = element_text(hjust = 0.4,size=14))
+      }else {
+        a=which(plot.data2[2]==component_selection)
+        plot.data2.ind=plot.data2[a,]
+        if(dim(plot.data2.ind)[1]==0){
+          indplots[[i]]<-NULL
+        }else{
+          value<-plot.data2.ind[,3]
+          variable<-plot.data2.ind[,2]
+          indplots[[i]]<-ggplot(plot.data2.ind, aes(x = time,y=value,colour=variable)) +
+            geom_line(aes(colour=variable)) +
+            scale_colour_discrete(guide = "none") +
+            facet_wrap(~variable,ncol= 1)+
+            labs(title=title[i], x="Time",
+                 y="State Component", color=NULL)+
+            theme(text = element_text(size=13),
+                  axis.text = element_text(size=14),
+                  plot.title = element_text(hjust = 0.4,size=15))
+          
+        }
+      }
       
     }
     
+    if (component_selection=="All") {
+      return (allplots)
+    } else {
+      return (indplots)
+    }
     
-    return (allplots)
   } 
+
+
 
 

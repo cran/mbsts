@@ -4,7 +4,6 @@
 #' 
 #' @description Generate draws from the posterior predictive distribution of a mbsts object. Samples from the posterior predictive distribution of the MBSTS model. 
 #' 
-#' 
 #' @param object An object of the mbsts class created by a call to the mbsts_function function.
 #' @param STmodel An object of the SSModel class created by a call to the tsc.setting function.
 #' @param newdata A vector or matrix containing the predictor variables to use in making the prediction. This is only required if the mbsts model has a regression component.
@@ -12,8 +11,9 @@
 
 #' @return An object of predicted values which is a list containing the following:
 #' \item{pred.dist}{An array of draws from the posterior predictive distribution. The first dimension in the array represents time, the second dimension denotes each target series, and the third dimension indicates each MCMC draw.}
-#' \item{pred.mean}{A matrix giving the posterior mean of the prediction for each target series.
-#' }
+#' \item{pred.mean}{A matrix giving the posterior mean of the prediction for each target series.}
+#' \item{pred.sd}{A matrix giving the posterior standard deviation of the prediction for each target series.}
+#' \item{pred.se}{A matrix giving the posterior standard error of the prediction for each target series, calculated by pred.sd divided by the square root of the numer of MCMC iterations.}
 #' 
 
 #'@references
@@ -91,7 +91,14 @@ mbsts.forecast<-
                 pred.distribution<-reg+err
             }
         }
+        
+        pred.dist<-array(numeric(),c(dim(pred.distribution)[3],dim(pred.distribution)[1],dim(pred.distribution)[2]))
+        
+        for (i in 1:dim(ob.sig2)[1]){
+          pred.dist[,,i]=t(rbind(pred.distribution[,i,]))
+        }
+        
         pred.mean<-apply(pred.distribution,c(1,2),mean)
         
-        return(list(pred.dist=pred.distribution,pred.mean=pred.mean))
+        return(list(pred.dist=pred.dist,pred.mean=pred.mean))
     }

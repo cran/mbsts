@@ -25,19 +25,6 @@ An object of the SSModel class.
 \description{
 Specify three time series components for the MBSTS model: the generalized linear trend component, the seasonal component, and the cycle component.
 }
-\examples{
-#Two target series
-Y<-as.matrix(simdata[,1:2])
-
-#split dataset into training set and test set
-n=dim(Y)[1]
-ntrain=n-5
-Ytrain<-Y[1:ntrain,]
- 
-#Specify time series components
-STmodel<-tsc.setting(Ytrain,mu=c(1,1),rho=c(0.6,0.8),S=c(12,0),vrho=c(0,0.99),
-                                                            lambda=c(0,pi/50))
-}
 \references{
 \Qiu2018
 

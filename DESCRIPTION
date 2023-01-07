@@ -1,9 +1,9 @@
 Package: mbsts
 Type: Package
 Title: Multivariate Bayesian Structural Time Series
-Version: 2.2
+Version: 3.0
 Author: Jinwen Qiu <qjwsnow_ctw@hotmail.com>, Ning Ning <patricianing@gmail.com>
-Maintainer: Jinwen Qiu <qjwsnow_ctw@hotmail.com>
+Maintainer: Ning Ning <patricianing@gmail.com>
 Description: Tools for data analysis with multivariate Bayesian structural time series (MBSTS) models.  Specifically, the package provides facilities for implementing general structural time series models, flexibly adding on different time series components (trend, season, cycle, and regression), simulating them, fitting them to multivariate correlated time series data, conducting feature selection on the regression component.
 License: LGPL-2.1
 Encoding: UTF-8
@@ -12,10 +12,12 @@ Depends: R(>= 3.5.0)
 Imports: KFAS, Matrix, pscl, MCMCpack, MASS, ggplot2, reshape2, BBmisc,
         matrixStats, methods
 Repository: CRAN
-RoxygenNote: 7.1.1
-LazyData: true
+RoxygenNote: 7.2.1
 Collate: 'mbsts.forecast.R' 'mbsts_class.R' 'mbsts_function.R'
-        'package.R' 'para.est.R' 'plot_comp.R' 'plot_prob.R'
-        'simdata.R' 'tsc.setting.R'
-Packaged: 2021-06-25 15:46:03 UTC; patricia
-Date/Publication: 2021-06-25 22:50:07 UTC
+        'package.R' 'para.est.R' 'plot_comp.R' 'plot_cvg.R'
+        'plot_prob.R' 'sim_data.R' 'tsc.setting.R'
+Packaged: 2023-01-06 21:59:44 UTC; patricianing
+Date/Publication: 2023-01-07 01:10:02 UTC
+Suggests: knitr, rmarkdown, testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
